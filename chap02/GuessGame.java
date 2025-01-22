@@ -10,37 +10,15 @@ public class GuessGame {
        p1 = new Player();
        p2 = new Player();
        p3 = new Player();
-       int guessp1 = 0;
-       int guessp2 = 0;
-       int guessp3 = 0;
-       boolean p1isRight = false;
-       boolean p2isRight = false;
-       boolean p3isRight = false;
        int targetNumber = (int) (Math.random() * 10);
        System.out.println("I'm thinking of a number between 0 and 9...");
+
        while(true) {
            System.out.println("Number to guess is " + targetNumber);
            
-           p1.guess();
-           p2.guess();
-           p3.guess();
-           
-           guessp1 = p1.number;
-           System.out.println("Player one guessed " + guessp1);
-           guessp2 = p2.number;
-           System.out.println("Player two guessed " + guessp2);
-           guessp3 = p3.number;
-           System.out.println("Player three guessed " + guessp3);
-           
-           if (guessp1 == targetNumber) {
-               p1isRight = true;
-           }
-           if (guessp2 == targetNumber) {
-               p2isRight = true;
-           }
-           if (guessp3 == targetNumber) {
-               p3isRight = true;
-           }
+           boolean p1isRight = generateAndCheckGuess(p1, targetNumber);
+           boolean p2isRight = generateAndCheckGuess(p2, targetNumber);
+           boolean p3isRight = generateAndCheckGuess(p3, targetNumber);
            
            if (p1isRight || p2isRight || p3isRight)
            {
@@ -57,4 +35,12 @@ public class GuessGame {
            }
        }
    }
+
+    // Gives player's guess and verifies whether it matches the target number
+    private boolean generateAndCheckGuess(Player player, int targetNumber) {
+        player.guess();
+        int guess = player.number;
+        System.out.println("Player guessed " + guess);
+        return guess == targetNumber;
+    }
 }
